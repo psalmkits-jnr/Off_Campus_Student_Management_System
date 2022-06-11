@@ -25,7 +25,7 @@ SECRET_KEY = '!ykv8ns8zqdy^1apywb(9n02in+hx#_p@_&&11l60k2))+ftre'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["offcampushousingsystem.herokuapp.com"]
 
 
 # Application definition
