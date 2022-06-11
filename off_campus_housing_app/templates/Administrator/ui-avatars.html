@@ -1,0 +1,218 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register Apartment Form{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title">My Services</h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Manage Apartments</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Register New</a>
+				</li>
+			</ul>
+		</div>
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<!-- form start -->
+					<form role="form" action="/add_course_save" method="post">
+						{% csrf_token %}
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<label>Name<span class="required">*</span></label>
+										<small class="form-text text-muted">Name of Landlord</small>
+										<select class="form-control" name="staffn">
+											{% for staff in staffs %}
+											<option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}
+											</option>
+											{% endfor %}
+										</select>
+									</div>
+									<div class="form-group">
+										<label>Apartment*</label>
+										<small class="form-text text-muted">Name of
+											the
+											Apartment you wish to register.</small>
+										<input type="text" class="form-control" required="required" name="course"
+										id="field4" placeholder="Enter Apartment Name">
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<label>Address<span class="required">*</span></label>
+										<small class="form-text text-muted">City/Town</small>
+										<input type="text" style="text-transform: capitalize;" class="form-control form-control" name="address"
+											required="required" placeholder="Enter Address">
+									</div>
+									<div class="form-group">
+										<label>Email Address<span class="required">*</span></label>
+										<small class="form-text text-muted">Enter the apartment's
+											offices email
+											address</small>
+										<input type="email" class="form-control" required="required" name="office_email"
+											placeholder="Enter Email">
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<label>Primary Phone No<span class="required">*</span></label>
+										<small class="form-text text-muted">What is your Office
+											phone
+											number?</small>
+										<input type="text" class="form-control form-control" required="required"
+											name="contact1" placeholder="Enter phone number">
+									</div>
+									<div class="form-group">
+										<label>Secondary Phone No</label>
+										<small class="form-text text-muted">Other office phone
+											number?</small>
+										<input type="text" class="form-control form-control" name="contact2"
+											placeholder="Enter phone number">
+									</div>
+									<!-- <div class="form-check">
+										<label class="form-check-label">
+											<input class="form-check-input" type="checkbox" name="checkbox" value="">
+											<span class="form-check-sign">Agree with terms and conditions</span>
+										</label>
+									</div> -->
+								</div>
+								<div class="form-group">
+									{% if messages %}
+									{% for message in messages %}
+									{% if message.tags == 'error' %}
+									<div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+									{% endif %}
+									{% if message.tags == 'success' %}
+									<div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+									{% endif %}
+									{% endfor %}
+									{% endif %}
+								</div>
+							</div>
+							<div class="card-footer">
+								<button type="submit" class="btn btn-success">Register Apartment</button>
+								<tr>
+									<td>
+										<button type="button" class="btn btn-danger" id="alert_2"
+											onclick="resetForm()">Cancel</button>
+									</td>
+								</tr>
+							</div>
+
+						</div>
+					</form>
+					<!-- form END -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+<!-- uppercase start -->
+<script type="text/javascript">
+
+	function forceKeyPressUppercase(e)
+	{
+	  var charInput = e.keyCode;
+	  if((charInput >= 97) && (charInput <= 122)) { // lowercase
+		if(!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+		  var newChar = charInput - 32;
+		  var start = e.target.selectionStart;
+		  var end = e.target.selectionEnd;
+		  e.target.value = e.target.value.substring(0, start) + String.fromCharCode(newChar) + e.target.value.substring(end);
+		  e.target.setSelectionRange(start+1, start+1);
+		  e.preventDefault();
+		}
+	  }
+	}
+  
+	document.getElementById("field4").addEventListener("keypress", forceKeyPressUppercase, false);
+  
+  </script>
+<!-- uppercase end -->
+
+<script>
+	//== Class definition
+	var AlertPopUp = function () {
+
+		//== Reset form on Cancel(alert_2)js
+		var initAlert = function () {
+			$('#alert_2').click(function (e) {
+				swal({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					type: 'warning',
+					buttons: {
+						confirm: {
+							text: 'Confirm',
+							className: 'btn btn-success'
+						},
+						cancel: {
+							visible: true,
+							className: 'btn btn-danger'
+						}
+					}
+				}).then((Delete) => {
+					if (Delete) {
+						swal({
+							title: 'Reset',
+							text: 'Your form has been reset.',
+							type: 'success',
+							buttons: {
+								confirm: {
+									className: 'btn btn-success'
+								}
+							}
+						});
+					} else {
+						swal.close();
+					}
+				});
+			});
+
+		};
+
+		return {
+			//== Init
+			init: function () {
+				initAlert();
+			},
+		};
+	}();
+
+	//== Class Initialization
+	jQuery(document).ready(function () {
+		AlertPopUp.init();
+	});
+</script>
+{% endblock javascripts %}

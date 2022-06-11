@@ -1,0 +1,121 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register Apartment Form{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">My Services</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Manage Students</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">View All</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit {{username}}</a>
+                </li>
+            </ul>
+        </div>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                  <!-- general form elements -->
+                  
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                      {% url 'add_student_save' as action_path %}
+                      {% include 'Administrator/form_template.html' with messages=messages form=form action_path=action_path button_text="Add Student" %}
+                  </div>
+                  <!-- /.card -->
+      
+      
+      
+                </div>
+                
+            </div>
+          </section>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    //== Class definition
+    var AlertPopUp = function () {
+
+        //== Reset form on Cancel(alert_2)js
+        var initAlert = function () {
+            $('#alert_2').click(function (e) {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    buttons: {
+                        confirm: {
+                            text: 'Confirm',
+                            className: 'btn btn-success'
+                        },
+                        cancel: {
+                            visible: true,
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((Delete) => {
+                    if (Delete) {
+                        swal({
+                            title: 'Reset',
+                            text: 'Your form has been reset.',
+                            type: 'success',
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+                });
+            });
+
+        };
+
+        return {
+            //== Init
+            init: function () {
+                initAlert();
+            },
+        };
+    }();
+
+    //== Class Initialization
+    jQuery(document).ready(function () {
+        AlertPopUp.init();
+    });
+</script>
+{% endblock javascripts %}

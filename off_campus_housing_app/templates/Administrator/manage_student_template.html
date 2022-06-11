@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Manage_Student {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">My Services</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Manage Students</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">View All</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- <div class="card-header">
+						<div class="card-title">All Landlords Details</div>
+					</div> -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Gender</th>
+                                    <th>Profile Pic</th>
+                                    <th>Renting Period</th>
+                                    <th>Apartment</th>
+                                    <th>Last Login</th>
+                                    <th>Date Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in students %}
+                                <tr>
+                                    <td>{{ student.admin.id }}</td>
+                                    <td>{{ student.admin.first_name }}</td>
+                                    <td>{{ student.admin.last_name }}</td>
+                                    <td>{{ student.admin.username }}</td>
+                                    <td>{{ student.admin.email }}</td>
+                                    <td>{{ student.address }}</td>
+                                    <td>{{ student.gender }}</td>
+                                    <td><img src="{{ student.profile_pic }}" style="width:100px" /></td>
+                                    <td>{{ student.session_year_id.session_start_year }} TO {{student.session_year_id.session_end_year}}</td>
+                                    <td>{{ student.course_id.course_name }}</td>
+                                    <td>{{ student.admin.last_login }}</td>
+                                    <td>{{ student.admin.date_joined }}</td>
+                                    <td><a href="{% url 'edit_student' student_id=student.admin.id %}"
+                                            class="btn btn-success">Edit</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

@@ -1,0 +1,195 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Add Subject
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Subject</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/add_subject_save" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Rental Name </label>
+                    <input type="text" class="form-control" name="subject_name" placeholder="Enter Subject">
+                  </div>
+                   <div class="form-group">
+                    <label>Choose Apartment </label>
+                    <select class="form-control" name="course">
+                        {% for course in courses %}
+                          <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Choose Landlord</label>
+                    <select class="form-control" name="staff">
+                        {% for staff in staffs %}
+                          <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" name="category">
+                      {%for categ in category %}
+                      <option value="{{categ}}">{{categ}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Per</label>
+                    <select class="form-control" name="per">
+                      {%for pr in per %}
+                      <option value="{{pr}}">{{pr}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Bathrooms</label>
+                    <select class="form-control" name="bathroom">
+                      {%for bathrm in bathroom %}
+                      <option value="{{bathrm}}">{{bathrm}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Housemates</label>
+                    <select class="form-control" name="housemates">
+                      {%for housemate in housemates %}
+                      <option value="{{housemate}}">{{housemates}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Toilet</label>
+                    <select class="form-control" name="toilet">
+                      {%for toilt in toilet %}
+                      <option value="{{toilt}}">{{toilet}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Kitchen</label>
+                    <select class="form-control" name="kitchen">
+                      {%for kit in kitchen %}
+                      <option value="{{kit}}">{{kitchen}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Wheelchair</label>
+                    <select class="form-control" name="wheelchair">
+                      {%for wheelch in wheelchair %}
+                      <option value="{{wheelch}}">{{wheelchair}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Wheelchair</label>
+                    <select class="form-control" name="wheelchair">
+                      {%for wheelch in wheelchair %}
+                      <option value="{{wheelch}}">{{wheelchair}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>WI-FI</label>
+                    <select class="form-control" name="wifi">
+                      {%for wif in wifi %}
+                      <option value="{{wif}}">{{wifi}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>WI-FI</label>
+                    <select class="form-control" name="music">
+                      {%for msc in music %}
+                      <option value="{{msc}}">{{music}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Pets</label>
+                    <select class="form-control" name="pets">
+                      {%for pet in pets %}
+                      <option value="{{pet}}">{{pets}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Smoking</label>
+                    <select class="form-control" name="smoking">
+                      {%for smokin in smoking %}
+                      <option value="{{smokin}}">{{smoking}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Age</label>
+                    <select class="form-control" name="age">
+                      {%for ag in age %}
+                      <option value="{{ag}}">{{age}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Tenant Type</label>
+                    <select class="form-control" name="tenant_type">
+                      {%for tt in tenant_type %}
+                      <option value="{{tt}}">{{tenant_type}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Sex</label>
+                    <select class="form-control" name="sex">
+                      {%for ss in sex %}
+                      <option value="{{ss}}">{{sex}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Add Subject</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+

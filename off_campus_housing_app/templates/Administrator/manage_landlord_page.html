@@ -1,0 +1,87 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Manage_Landlord {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Administrator</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Manage Landlords</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">View All</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- <div class="card-header">
+						<div class="card-title">All Landlords Details</div>
+					</div> -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Last Login</th>
+                                    <th>Date Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for staff in staffs %}
+                                <tr>
+                                    <td>{{ staff.admin.id }}</td>
+                                    <td>{{ staff.admin.first_name }}</td>
+                                    <td>{{ staff.admin.last_name }}</td>
+                                    <td>{{ staff.admin.username }}</td>
+                                    <td>{{ staff.admin.email }}</td>
+                                    <td>{{ staff.address }}</td>
+                                    <td>{{ staff.admin.last_login }}</td>
+                                    <td>{{ staff.admin.date_joined }}</td>
+                                    <td><a href="/edit_staff/{{ staff.admin.id }}" class="btn btn-success">Edit</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

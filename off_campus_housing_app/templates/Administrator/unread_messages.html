@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register Apartment Form{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <!-- form start -->
+                    <form role="form" action="/add_staff_save" method="post">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <label>Message Header</label>
+                                </div>
+                                <div class="col-md-12 col-lg-8">
+                                    <label>Message Body</label>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </form>
+                    <!-- form END -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+
+
+
+{% endblock javascripts %}

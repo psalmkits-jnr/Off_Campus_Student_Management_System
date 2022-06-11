@@ -1,0 +1,288 @@
+<!-- Sidebar -->
+<div class="sidebar sidebar-style-2" data-background-color="dark2">
+	<div class="sidebar-wrapper scrollbar scrollbar-inner">
+		<div class="sidebar-content">
+
+			{% if request.user.is_authenticated %}
+			<div class="user">
+				<div class="avatar-sm float-left mr-2">
+					<img src="/static/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+				</div>
+				<div class="info">
+					<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+						<span>
+							{{ request.user.username }}
+							<span class="user-level">
+								{{ request.user.email }}
+							</span>
+							<span class="caret"></span>
+						</span>
+					</a>
+					<div class="clearfix"></div>
+
+					<div class="collapse in" id="collapseExample">
+						<ul class="nav">
+							<li>
+								<a href="#profile">
+									<span class="link-collapse">My Profile</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="link-collapse">Logout</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav nav-primary">
+				<li class="nav-section">
+					<span class="sidebar-mini-icon">
+						<i class="fa fa-ellipsis-h"></i>
+					</span>
+					<h4 class="text-section">SERVICES</h4>
+				</li>
+
+				<!-- new -->
+
+				<li class="nav-item">
+					<a data-toggle="collapse" href="#submenu">
+						<i class="fas fa-bars"></i>
+						<p>My Services</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="submenu">
+						<ul class="nav nav-collapse">
+							<li>
+								<a data-toggle="collapse" href="#subnav1">
+									<span class="sub-item">Manage Landlords</span>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="subnav1">
+									<ul class="nav nav-collapse subnav">
+										<li class="nav-itemm">
+											{% url 'add_staff' as add_staff %}
+											<a href="{% url 'add_staff' %}"
+												class="nav-link {% if request.path == add_staff %} active {% endif %}">
+												<span class="sub-item">New Landlord</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'manage_staff' as manage_staff %}
+											<a href="{% url 'manage_staff' %}"
+												class="nav-link {% if request.path == manage_staff %} active {% endif %}">
+												<span class="sub-item">View List</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<a data-toggle="collapse" href="#subnav2">
+									<span class="sub-item">Manage Apartments</span>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="subnav2">
+									<ul class="nav nav-collapse subnav">
+										<li class="nav-itemm">
+											{% url 'add_course' as add_course %}
+											<a href="{% url 'add_course' %}"
+												class="nav-link {% if request.path == add_apartments %} active {% endif %}">
+												<span class="sub-item">Register New</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'manage_course' as manage_course %}
+											<a href="{% url 'manage_course' %}"
+												class="nav-link {% if request.path == manage_apartments %} active {% endif %}">
+												<span class="sub-item">View All</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<a data-toggle="collapse" href="#subnav3">
+									<span class="sub-item">Manage Rentals</span>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="subnav3">
+									<ul class="nav nav-collapse subnav">
+										<li class="nav-itemm">
+											{% url 'add_subject' as add_subject %}
+											<a href="{% url 'add_subject' %}" class="nav-link {% if request.path == add_subject %} active {% endif %}">
+												<span class="sub-item">Register New</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'manage_subject' as manage_subject %}
+											<a href="{% url 'manage_subject' %}" class="nav-link {% if request.path == manage_subject %} active {% endif %}">
+												<span class="sub-item">View All</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<a data-toggle="collapse" href="#subnav4">
+									<span class="sub-item">Manage Students</span>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="subnav4">
+									<ul class="nav nav-collapse subnav">
+										<li class="nav-itemm">
+											{% url 'add_student' as add_student %}
+											<a href="{% url 'add_student' %}" class="nav-link {% if request.path == add_student %} active {% endif %}">
+												<span class="sub-item">Register New</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'manage_student' as manage_student %}
+											<a href="{% url 'manage_student' %}" class="nav-link {% if request.path == manage_student %} active {% endif %}">
+												<span class="sub-item">View All</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="nav-itemm">
+								{% url 'manage_session' as manage_session %}
+								<a href="{% url 'manage_session' %}" class="nav-link {% if request.path == manage_session %} active {% endif %}">
+									<span class="sub-item">Register New Session</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<!-- xxxxxxx restrict accounts start -->
+				<li class="nav-item {% if 'Administrator-' in segment %} active {% endif %}">
+					<a data-toggle="collapse" href="#administrator">
+						<i class="fas fa-layer-group"></i>
+						<p>Restrict Users</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="administrator">
+						<ul class="nav nav-collapse">
+							
+							<li class="nav-itemm">
+								{% url 'restrict_landlord_user' as restrict_landlord_user %}
+								<a href="{% url 'restrict_landlord_user' %}" class="nav-link {% if request.path == restrict_landlord_user %} active {% endif %}">
+									<span class="sub-item">Restrict Landlord Activity</span>
+								</a>
+							</li>
+							<li class="nav-itemm">
+								{% url 'restrict_student_user' as restrict_student_user %}
+								<a href="{% url 'restrict_student_user' %}" class="nav-link {% if request.path == restrict_student_user %} active {% endif %}">
+									<span class="sub-item">Restrict Student Activity</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<!-- xxxxxxx restrict accounts start -->
+				<!-- feedback app  start-->
+				<li class="nav-item">
+					<a data-toggle="collapse" href="#mess&not">
+						<i class="fas fa-bars"></i>
+						<p>Feedbacks(120)</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="mess&not">
+						<ul class="nav nav-collapse">
+							<li>
+								<a data-toggle="collapse" href="#subnav10">
+									<span class="sub-item">InBox(20)</span>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="subnav10">
+									<ul class="nav nav-collapse subnav">
+										<li class="nav-itemm">
+											{% url 'unread_messages' as unread_messages %}
+											<a href="{% url 'unread_messages' %}"
+												class="nav-link {% if request.path == unread_messages %} active {% endif %}">
+												<span class="sub-item">Unread Messages(20)</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'old_messages' as old_messages %}
+											<a href="{% url 'old_messages' %}"
+												class="nav-link {% if request.path == old_messages %} active {% endif %}">
+												<span class="sub-item">Read Messages</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'manage_course' as manage_course %}
+											<a href="{% url 'manage_course' %}"
+												class="nav-link {% if request.path == manage_course %} active {% endif %}">
+												<span class="sub-item">Notifications(100)</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<a data-toggle="collapse" href="#subnav50">
+									<span class="sub-item">Batch Messaging</span>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="subnav50">
+									<ul class="nav nav-collapse subnav">
+										<li class="nav-itemm">
+											{% url 'add_course' as add_course %}
+											<a href="{% url 'add_course' %}"
+												class="nav-link {% if request.path == add_apartments %} active {% endif %}">
+												<span class="sub-item">To Landlords</span>
+											</a>
+										</li>
+										<li class="nav-itemm">
+											{% url 'manage_course' as manage_course %}
+											<a href="{% url 'manage_course' %}"
+												class="nav-link {% if request.path == manage_apartments %} active {% endif %}">
+												<span class="sub-item">To Students</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<!-- feedback app stop -->
+				<!-- xxxxxxx other services start -->
+				<li class="nav-item {% if 'rentals-' in segment %} active {% endif %}">
+					<a data-toggle="collapse" href="#rentals">
+						<i class="fas fa-layer-group"></i>
+						<p>Other Services</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="rentals">
+						<ul class="nav nav-collapse">
+							
+							<li class="nav-itemm">
+								{% url 'add_subject' as add_subject %}
+								<a href="{% url 'add_subject' %}" class="nav-link {% if request.path == add_rentals %} active {% endif %}">
+									<span class="sub-item">Service a</span>
+								</a>
+							</li>
+							<li class="nav-itemm">
+								{% url 'manage_subject' as manage_subject %}
+								<a href="{% url 'manage_subject' %}" class="nav-link {% if request.path == manage_rentals %} active {% endif %}">
+									<span class="sub-item">Service b</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<!-- xxxxxxx -->
+			</ul>
+			{% else %}
+
+			{% endif %}
+		</div>
+	</div>
+</div>
+<!-- End Sidebar -->
+
+

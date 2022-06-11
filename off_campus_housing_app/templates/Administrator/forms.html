@@ -1,0 +1,432 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register Apartment Form{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title">Landlord</h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">My Rentals</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Register New</a>
+				</li>
+			</ul>
+		</div>
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form role="form" action="/add_rental_save" method="post">
+						{% csrf_token %}
+						<div class="card-body">
+							Rental Details
+							<hr>
+							<div class="row">
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<label for="landlord">Landlord<span class="required">*</span></label>
+										<small class="form-text text-muted">Landlord</small>
+										<input type="text" class="form-control" readonly="readonly"
+											placeholder="PSALMKITS" name="landlord" required="required">
+									</div>
+
+									<div class="form-group">
+										<label for="apartment">Apartment </label>
+										<small class="form-text text-muted">Choose Property To List New Rental</small>
+										<select class="form-control" name="apartment">
+											{% for apartment in apartments %}
+											<option value="{{ apartment.id }}">{{ apartment.apartment_name }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="rental_name">Rental Name*</label>
+										<small class="form-text text-muted">Name of
+											the
+											Unit you wish to register.</small>
+										<input type="text" class="form-control" required="required" name="rental_name"
+											placeholder="Rental">
+									</div>
+
+									<div class="form-group">
+										<label for="category">Rental Type</label>
+										<small class="form-text text-muted">What Kind Of Unit Are You Listing?.</small>
+										<select class="form-control" name="category">
+											{% for category in categories %}
+											<option value="{{ rental.id }}">{{ rental.category }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+								</div>
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<label for="country">Country<span class="required">*</span></label>
+										<small class="form-text text-muted">Country</small>
+										<input type="text" class="form-control" readonly="readonly" name="country"
+											required="required" placeholder="KENYA">
+									</div>
+
+									<div class="form-group">
+										<label for="city">City<span class="required">*</span></label>
+										<small class="form-text text-muted">City</small>
+										<input type="text" class="form-control" name="city" required="required"
+											placeholder="City">
+									</div>
+
+									<div class="form-group">
+										<label for="units">Units*</label>
+										<small class="form-text text-muted">Number Of Units</small>
+										<input type="text" class="form-control" required="required" name="units"
+											placeholder="1">
+									</div>
+
+									<div class="form-group">
+										<label for="rental_cost">Rental Cost*</label>
+										<small class="form-text text-muted">Rental Amount Due</small>
+										<input type="text" class="form-control" required="required" name="rental_cost"
+											placeholder="0.00">
+									</div>
+
+								</div>
+								<div class="col-md-6 col-lg-4">
+
+									<div class="form-group">
+										<label for="per">Per*</label>
+										<small class="form-text text-muted">Monthly or Semester</small>
+										<select class="form-control" name="per">
+											{% for pr in per %}
+											<option value="{{ rental.id }}">{{ rental.pr }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="deposit_amount">Deposit*</label>
+										<small class="form-text text-muted">Deposit Amount</small>
+										<input type="text" class="form-control" required="required"
+											name="deposit_amount" placeholder="0.00">
+									</div>
+
+									<div class="form-group">
+										<label for="description">Description<span class="required">*</span></label>
+										<small id="office_contact1" class="form-text text-muted">Write Down Anything
+											Else You Would Like To Mention About The Property.(Such As Environmental
+											Conditions,Distance To Nearby Shops e.t.c)</small>
+										<!-- <input type="text" rows="5" class="form-control" required="required" name="description"
+											placeholder=""> -->
+										<textarea class="form-control" required="required" name="description" rows="4">
+
+											</textarea>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+						<!-- test -->
+						<div class="card-body">
+							<!-- Amenity Details
+							<hr> -->
+							<div class="row">
+								<div class="col-md-6 col-lg-4">
+
+									<div class="form-group">
+										<label>Fascilities Available*</label>
+										<!-- <label for="bathroom"> bathroom* </label> -->
+										<small class="form-text text-muted">Bathroom</small>
+										<select class="form-control" name="bathroom">
+											{% for bathroom in bathrooms %}
+											<option value="{{ rental.id }}">{{ rental.bathroom }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="toilet"> Toilet* </label> -->
+										<small class="form-text text-muted">Toilet</small>
+										<select class="form-control" name="toilet">
+											{% for toilet in toilets %}
+											<option value="{{ rental.id }}">{{ rental.toilet }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="kitchen"> Kitchen* </label> -->
+										<small class="form-text text-muted">Kitchen</small>
+										<select class="form-control" name="kitchen">
+											{% for kitchen in kitchens %}
+											<option value="{{ rental.id }}">{{ rental.kitchen }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="wheelchair">WheelChair</label> -->
+										<small class="form-text text-muted">WheelChair Accessible?</small>
+										<select class="form-control" name="wheelchair">
+											{% for wheelchair in wheelchairs %}
+											<option value="{{ rental.id }}">{{ rental.wheelchair}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+
+								</div>
+								<div class="col-md-6 col-lg-4">
+
+									<div class="form-group">
+										<label>Preffered Tenants*</label>
+										<!-- <label for="age">Age</label> -->
+										<small class="form-text text-muted">Age Preference</small>
+										<select class="form-control" name="age">
+											{% for ag in age %}
+											<option value="{{ rental.id }}">{{ rental.ag}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="tenant_type">Tenant</label> -->
+										<small class="form-text text-muted">Tenant Type Preference</small>
+										<select class="form-control" name="tenant_type">
+											{% for tenantty in tenant_type %}
+											<option value="{{ rental.id }}">{{ rental.tenantty}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="sex">Gender</label> -->
+										<small class="form-text text-muted">Gender Preference</small>
+										<select class="form-control" name="sex">
+											{% for sx in sex %}
+											<option value="{{ rental.id }}">{{ rental.sx}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for=" housemates"> Housemates* </label> -->
+										<small class="form-text text-muted">Housemates Gender</small>
+										<select class="form-control" name="housemates">
+											{% for housemate in housemates %}
+											<option value="{{ rental.id }}">{{ rental.housemate }}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+								</div>
+								<div class="col-md-6 col-lg-4">
+
+									<div class="form-group">
+										<label>Housing Rules*</label>
+										<!-- <label for="music">Music</label> -->
+										<small class="form-text text-muted">Music Allowed?</small>
+										<select class="form-control" name="music">
+											{% for musc in music %}
+											<option value="{{ rental.id }}">{{ rental.musc}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="pets">Pets</label> -->
+										<small class="form-text text-muted">Pets Allowed?</small>
+										<select class="form-control" name="pets">
+											{% for pet in pets %}
+											<option value="{{ rental.id }}">{{ rental.pet}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+									<div class="form-group">
+										<!-- <label for="smoking">Smoking</label> -->
+										<small class="form-text text-muted">Smoking Allowed?</small>
+										<select class="form-control" name="smoking">
+											{% for smk in smoking %}
+											<option value="{{ rental.id }}">{{ rental.smk}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+						<!-- test -->
+						<!-- test2 -->
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<label>Amenities Available*</label>
+										<!-- <label for="wifi">WI-FI</label> -->
+										<small class="form-text text-muted">WI-FI Available?</small>
+										<select class="form-control" name="wheelchair">
+											{% for w in wifi %}
+											<option value="{{ rental.id }}">{{ rental.w}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+								</div>
+								<div class="col-md-12 col-lg-8">
+									<!-- create the table for utility costs -->
+
+									<div class="form-group">
+										<label>Utility Costs*</label>
+									</div>
+									<div class="card-body table-responsive p-0">
+										<table class="table table-hover text-nowrap">
+											<thead>
+												<tr>
+													<th>Type</th>
+													<th>Included In Rent?</th>
+													<th>How Often?</th>
+													<th>Estimated/Exact?</th>
+													<th>Amount</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for apartment in apartments %}
+												<tr>
+													<td>{{ apartment.id }}</td>
+													<td>{{ apartment.apartment_name }}</td>
+													<td><a href="/edit_apartment/{{ apartment.id }}"
+															class="btn btn-success">Edit</a></td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+
+									<!-- break the table for utility costs -->
+								</div>
+
+							</div>
+						</div>
+						<!-- test2 -->
+						<div class="card-action">
+							<button onclick="save()" type="submit" name="submit" id="submit"
+								class="btn btn-success">Submit</button>
+							<!-- <button type="cancel" class="btn btn-danger">Cancel</button> -->
+							<tr>
+								<td>
+									<button type="button" class="btn btn-danger" id="alert_2"
+										onclick="resetForm()">Cancel</button>
+								</td>
+							</tr>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+	//== Class definition
+	var AlertPopUp = function () {
+
+		//== Reset form on Cancel(alert_2)js
+		var initAlert = function () {
+			$('#alert_2').click(function (e) {
+				swal({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					type: 'warning',
+					buttons: {
+						confirm: {
+							text: 'Confirm',
+							className: 'btn btn-success'
+						},
+						cancel: {
+							visible: true,
+							className: 'btn btn-danger'
+						}
+					}
+				}).then((Delete) => {
+					if (Delete) {
+						swal({
+							title: 'Reset',
+							text: 'Your form has been reset.',
+							type: 'success',
+							buttons: {
+								confirm: {
+									className: 'btn btn-success'
+								}
+							}
+						});
+					} else {
+						swal.close();
+					}
+				});
+			});
+
+		};
+
+		return {
+			//== Init
+			init: function () {
+				initAlert();
+			},
+		};
+	}();
+
+	//== Class Initialization
+	jQuery(document).ready(function () {
+		AlertPopUp.init();
+	});
+</script>
+
+<!-- <script>
+	function takevalue(){
+		var apartment_name=document.getElementById("apartment").value;
+		var office_address=document.getElementById("address").value;
+		var office_email=document.getElementById("email").value;
+		office_contact1=document.getElementById("contact1").value;
+		office_contact2=document.getElementById("contact2").value;
+	}
+</script> -->
+<script>
+	var storedItem = localStorage.getItem("storedItem");
+	function save() {
+		var apartment_name = document.getElementById("apartment_name").value;
+		var office_address = document.getElementById("office_address").value;
+		var office_email = document.getElementById("office_email").value;
+		var office_contact1 = document.getElementById("office_contact1").value;
+		var office_contact2 = document.getElementById("office_contact2").value;
+		localStorage.setItem("storedItem", apartment_name, office_address, office_email, office_contact1, office_contact2)
+	}
+</script>
+
+
+
+{% endblock javascripts %}

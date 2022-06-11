@@ -1,0 +1,75 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Manage_Rentals {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title">Landlord</h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Apartments</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Manage Apartments</a>
+				</li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Apartment Details</div>
+					</div>
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover text-nowrap">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Rental Name</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+									{% for apartment in apartments %}
+									  <tr>
+										<td>{{ apartment.id }}</td>
+										<td>{{ apartment.apartment_name }}</td>
+										<td><a href="/edit_apartment/{{ apartment.id }}" class="btn btn-success">Edit</a></td>
+									  </tr>
+									{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

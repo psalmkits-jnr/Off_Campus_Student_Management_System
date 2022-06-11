@@ -1,0 +1,171 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register Apartment Form{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title">My Services</h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">New Session</a>
+				</li>
+			</ul>
+		</div>
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <div class="row">
+            <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card ">
+            <div class="card-header">
+              <h3 class="card-title">Add Session Year</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" action="/add_session_save" method="post">
+                {% csrf_token %}
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Session Start Year </label>
+                  <input type="date" class="form-control" name="session_start" placeholder="Enter Session Start Year">
+                </div>
+
+               <div class="form-group">
+                  <label>Session End Year </label>
+                  <input type="date" class="form-control" name="session_end" placeholder="Enter Session End Year">
+                </div>
+
+
+                 <div class="form-group">
+                    {% if messages %}
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-block">Add Session Year</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+
+
+
+        </div>
+        </div>
+    
+
+
+
+		
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+<!-- uppercase start -->
+<script type="text/javascript">
+
+	function forceKeyPressUppercase(e)
+	{
+	  var charInput = e.keyCode;
+	  if((charInput >= 97) && (charInput <= 122)) { // lowercase
+		if(!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+		  var newChar = charInput - 32;
+		  var start = e.target.selectionStart;
+		  var end = e.target.selectionEnd;
+		  e.target.value = e.target.value.substring(0, start) + String.fromCharCode(newChar) + e.target.value.substring(end);
+		  e.target.setSelectionRange(start+1, start+1);
+		  e.preventDefault();
+		}
+	  }
+	}
+  
+	document.getElementById("field4").addEventListener("keypress", forceKeyPressUppercase, false);
+  
+  </script>
+<!-- uppercase end -->
+
+<script>
+	//== Class definition
+	var AlertPopUp = function () {
+
+		//== Reset form on Cancel(alert_2)js
+		var initAlert = function () {
+			$('#alert_2').click(function (e) {
+				swal({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					type: 'warning',
+					buttons: {
+						confirm: {
+							text: 'Confirm',
+							className: 'btn btn-success'
+						},
+						cancel: {
+							visible: true,
+							className: 'btn btn-danger'
+						}
+					}
+				}).then((Delete) => {
+					if (Delete) {
+						swal({
+							title: 'Reset',
+							text: 'Your form has been reset.',
+							type: 'success',
+							buttons: {
+								confirm: {
+									className: 'btn btn-success'
+								}
+							}
+						});
+					} else {
+						swal.close();
+					}
+				});
+			});
+
+		};
+
+		return {
+			//== Init
+			init: function () {
+				initAlert();
+			},
+		};
+	}();
+
+	//== Class Initialization
+	jQuery(document).ready(function () {
+		AlertPopUp.init();
+	});
+</script>
+{% endblock javascripts %}
